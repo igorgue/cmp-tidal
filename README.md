@@ -70,6 +70,8 @@ require("cmp").setup({
 By default `tidal_samples` will use the standard installation paths for the 'Dirt Samples'.
 You can change this by passing the absolute path to your 'Dirt Samples' folder to the `dirt_samples` option.
 
+**`dirt_samples`** (string): Path to the Dirt Samples folder (default: auto-detected)
+
 E.g.:
 
 ```lua
@@ -87,9 +89,52 @@ require("cmp").setup({
 })
 ```
 
+**`custom_samples`** (table): Array of additional custom sample folder paths (default: `{}`)
+
+You can add your own custom sample folders that will be scanned in addition to the default Dirt Samples:
+
+```lua
+require("cmp").setup({
+  sources = {
+    { name = "tidal" },
+    {
+      name = "tidal_samples",
+      option = {
+        custom_samples = {
+          "~/my-custom-samples",
+          "~/another-sample-library",
+          "/path/to/more/samples",
+        },
+      },
+    },
+  -- ...more sources
+  },
+})
+```
+
+You can also combine both options:
+
+```lua
+require("cmp").setup({
+  sources = {
+    { name = "tidal" },
+    {
+      name = "tidal_samples",
+      option = {
+        dirt_samples = "~/Library/Application Support/SuperCollider/downloaded-quarks/Dirt-Samples",
+        custom_samples = {
+          "~/my-custom-samples",
+        },
+      },
+    },
+  -- ...more sources
+  },
+})
+```
+
 ## Roadmap
 
-- [ ] New option: `custom_samples` to pass additional custom sample folders
+- [x] New option: `custom_samples` to pass additional custom sample folders
 - [ ] Autocompletion for sample number (bd -> bd:1)
 - [ ] Caching
 
